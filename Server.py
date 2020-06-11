@@ -5,6 +5,7 @@ from http import HTTPStatus
 import urllib.parse
 import shutil
 import helper
+import geocode
 
 def getFiles(dir=''):
     files = os.listdir(dir)
@@ -44,6 +45,7 @@ class ModifiedServer(SimpleHTTPRequestHandler):
         #need fname,location,depth[3],terzaghi[3],meyerhof[3],hansen[3],vesic[3],teng[3],plasix[3]
         filename = qd['fname'][0]
         location = qd['location'][0]
+        geocode.findGeocode(location)
         depth = qd['depth']
         terzaghi = qd['terzaghi']
         meyerhof = qd['meyerhof']

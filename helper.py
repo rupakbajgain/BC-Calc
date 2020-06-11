@@ -71,13 +71,13 @@ def fail_string():
         t+='\n[{}]: '.format(i[2]) + i[1]
     return t
 
-def write_csv(filename, data, dir_n='.\\processing\\'):
+def write_csv(filename, data, dir_n):
     with open(dir_n+filename, 'w', newline="") as csv_file:
         writer = csv.writer(csv_file)
         for i in data:
             writer.writerow(i)
     
-def load_csv(filename, dir_n='.\\processing\\'):
+def load_csv(filename, dir_n):
     out = []
     with open(dir_n+filename) as csv_file:
         reader = csv.reader(csv_file)
