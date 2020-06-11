@@ -20,6 +20,7 @@ def fetchGeo(name):
     return None
 
 def findGeocode(oname):
+    global results
     name = oname + ', Nepal'
     old_query  =False
     for i,l,lo in results:
@@ -60,7 +61,6 @@ def process_file(files):
     print(loc,f)
 
 if __name__=='__main__':
-    files = helper.getMyFiles('csv', '.', '.\\datas\\result\\')
     try:
         results.extend(helper.load_csv('locations.csv','.\\datas\\helper\\'))
     except:
