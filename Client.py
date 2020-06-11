@@ -3,6 +3,7 @@ import time
 import socket
 from test import get_result_from_file_data
 
+oldMessage = ''
 def get_ip():
     s= socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     try:
@@ -16,6 +17,7 @@ def get_ip():
     
 server_ip = None
 def failProofSend(path, params={}):
+    global oldMessage
     while(True):
         try:
             r = requests.get(path,params)
@@ -24,7 +26,9 @@ def failProofSend(path, params={}):
         except KeyboardInterrupt:
             raise KeyboardInterrupt
         except:
-            print('Reconnecting')
+            if oldMessage!='Reconnecting':
+                print('Reconnecting')
+                oldMessage='Reconnecting'
             pass
 
 def getAndProcessFile(name):
@@ -82,16 +86,21 @@ def getAndProcessFile(name):
         return
 
 def mainLoop():
+    global oldMessage
     while(True):
         try:
             file=failProofSend('http://{}:7875/main/get'.format(server_ip)).decode()
             if file=='done':
-                print('done')
+                if oldMessage!='done':
+                    print('done')
+                    oldMessage='done'
                 time.sleep(2)
             elif file:
                 getAndProcessFile(file)
             else:
-                print('wait')
+                if oldMessage!='wait':
+                    print('wait')
+                    oldMessage='wait'
                 time.sleep(1)
         except KeyboardInterrupt:
             print('\nKeyboard interrupt received, exiting.')

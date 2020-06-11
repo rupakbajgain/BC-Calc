@@ -6,11 +6,14 @@ import urllib.parse
 import shutil
 import helper
 import geocode
+from threading import Lock
 
 def getFiles(dir=''):
     files = os.listdir(dir)
     return files
 
+slock = Lock()
+glock = Lock()
 sgiven = []
 class ModifiedServer(SimpleHTTPRequestHandler):
     def log_message(self,*args,**kargs):
@@ -23,13 +26,14 @@ class ModifiedServer(SimpleHTTPRequestHandler):
     def get_handler(self):
         global sgiven
         r=[]
-        files = getFiles('.\\datas\\unprocessed')
         given = None
-        for i in files:
-            if not i in sgiven:
-                given = i
-                sgiven.append(i)
-                break
+        with slock:
+            files = getFiles('.\\datas\\unprocessed')
+            for i in files:
+                if not i in sgiven:
+                    given = i
+                    sgiven.append(i)
+                    break
         if given:
             r=[given]
         else:
@@ -45,7 +49,8 @@ class ModifiedServer(SimpleHTTPRequestHandler):
         #need fname,location,depth[3],terzaghi[3],meyerhof[3],hansen[3],vesic[3],teng[3],plasix[3]
         filename = qd['fname'][0]
         location = qd['location'][0]
-        geocode.findGeocode(location)
+        with glock:
+            geocode.findGeocode(location)
         depth = qd['depth']
         terzaghi = qd['terzaghi']
         meyerhof = qd['meyerhof']
@@ -82,17 +87,18 @@ class ModifiedServer(SimpleHTTPRequestHandler):
         filename = qd['fname'][0]
         r=['OK']
         print('Done:', filename)
-        try:
-            shutil.move('.\\datas\\unprocessed\\'+filename,'.\\datas\\processed\\')
-        except:
+        with slock:
             try:
-                os.unlink('.\\datas\\unprocessed\\'+filename)
+                shutil.move('.\\datas\\unprocessed\\'+filename,'.\\datas\\processed\\')
+            except:
+                try:
+                    os.unlink('.\\datas\\unprocessed\\'+filename)
+                except:
+                    pass
+            try:
+                sgiven.remove(filename)
             except:
                 pass
-        try:
-            sgiven.remove(filename)
-        except:
-            pass
         content_type = 'text'
         return (r, content_type)
     
@@ -103,14 +109,15 @@ class ModifiedServer(SimpleHTTPRequestHandler):
         filename = qd['fname'][0]
         etype = qd['err_type'][0]
         print('Err:', filename,':-',etype)
-        try:
-            shutil.move('.\\datas\\unprocessed\\'+filename,'.\\datas\\error\\')
-        except:
+        with slock:
             try:
-                os.unlink('.\\datas\\unprocessed\\'+filename)
+                shutil.move('.\\datas\\unprocessed\\'+filename,'.\\datas\\error\\')
             except:
-                pass
-        sgiven.remove(filename)
+                try:
+                    os.unlink('.\\datas\\unprocessed\\'+filename)
+                except:
+                    pass
+            sgiven.remove(filename)
         r=['OK']
         content_type = 'text'
         return (r, content_type)
