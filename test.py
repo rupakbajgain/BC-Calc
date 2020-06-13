@@ -49,6 +49,10 @@ def get_result_from_file_data(data, filename):
 #Solve single file
 if __name__=='__main__':
     if len(sys.argv)!=2:
+        try:
+            os.unlink("C:\\Program Files (x86)\\Plaxis8x\\force.txt")
+        except:
+            pass
         print('Filename required as first parameter.')
     else:
         tmpdir = os.getcwd()+'\\temp\\'
