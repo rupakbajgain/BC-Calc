@@ -39,11 +39,10 @@ def get_correctedGamma(N60, y_sat, GI):
 
 # correction from: https://civilengineeringbible.com/subtopics.php?i=91
 def get_Cu(N60, GI, is_clayey):
-    #guess from first letter if it is cohesive or not
     Cu=0
     if is_clayey:
         Cu = 0.29 * N60**0.72 * 100
-        Cu=clamp(Cu, 10, 103)
+        Cu=clamp(Cu, 10*2, 103*2)/2
     if GI=='CG' or GI=='GC':
         Cu=20
     elif 'SM'== GI:
@@ -82,8 +81,13 @@ def get_phi(N60, GI, packing_case):
             phi = clamp(phi,40,45)
         else:
             phi = clamp(phi,45,60)
+    elif GI[0]=='C':
+        if GI[1]=='H':
+            phi = clamp(phi, 17, 31)
+        else:
+            phi = clamp(phi, 27, 35)
     else:
-        phi=0.01
+        phi = clamp(phi, 23, 41)
     return phi
 
 def get_E(N60, GI, packing_case):
@@ -97,13 +101,12 @@ def get_E(N60, GI, packing_case):
             E=clamp(E, 30_000, 55_000)
     elif GI[0] == 'G':
         E=clamp(E,70_000,170_000)
-    elif GI[0] == 'M':
-        E=clamp(E,10_000,20_000)
     else:
         if packing_case<3:
             E=clamp(E, 4_000, 20_000)
         else:#elif packing_case<2:
             E=clamp(E, 20_000, 40_000)
+        E=E/2
         #else: #no stiff clay
         #    E=clamp(E, 40_000, 100_000)
     return E
@@ -136,13 +139,3 @@ def material_creater(excel_data):
     for i in excel_data:
         results.append(process_sfile(i))
     return results
-
-#files = helper.getMyFiles('ped', '.')#.mtl
-#for i in files:
-#    print('Loading file:', i[0])
-#    helper.give_file_hint(i[0])
-#    try:
-#        process_file(i)
-#    except helper.helper_exception:
-#        pass
-#helper.print_failed()

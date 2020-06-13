@@ -23,7 +23,7 @@ def process_file(name, display=False):
         result.append(cdata)
         if display:
             for idx,j in enumerate(cdata):
-                print('Depth : ', 1.5*idx)
+                print('Depth : ', 1.5*(idx+1))
                 for idx2,j in enumerate(j):
                     print(methods[idx2],':', j)
         results.append(result)

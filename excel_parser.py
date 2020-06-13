@@ -508,32 +508,6 @@ def process_file(filename):
         if result:
             results.append((name, result))
     return results
-    #for idx, i in enumerate(results):
-    #    filtered = [(i[0],)]+i[1]
-    #    if len(results)==1:
-    #        helper.write_csv(file+'.ped',filtered)
-    #    else:
-    #        helper.write_csv(file+ '[' + sheets_names[idx] +']' +'.ped',filtered)
-    #shutil.move('.\\unprocessed\\'+filename,'.\\processing\\')
-    #for idx, i in enumerate(results):
-    #    filtered = [(i[0],)]+i[1]
-    #    if len(results)==1:
-    #        helper.write_csv(file+'.ped',filtered)
-    #    else:
-    #        helper.write_csv(file+ '[' + sheets_names[idx] +']' +'.ped',filtered)
-    #print(results)
-
-#files = helper.getMyFiles('xls', '.', 'temp')
-#files.extend(helper.getMyFiles('xlsx', '.', 'temp'))
-#for i in files:
-#    print('Loading file:', i[0])
-#    helper.give_file_hint(i[0])
-#    try:
-#        process_file(i)
-#    except helper.helper_exception:
-#        pass
-#helper.print_failed()
-
 
 def excel_parser(file):
     helper.give_file_hint(file)

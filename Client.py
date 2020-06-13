@@ -137,7 +137,7 @@ def ServerIP():
 
 def startClient():
     global server_ip
-    print('Starting server(6s max.)')
+    print('Connecting to server(6s max.)')
     sip = ServerIP()
     if sip:
         print('ServerIP: ',sip)

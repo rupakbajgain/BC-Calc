@@ -6,7 +6,6 @@ import win32gui
 import win32con
 import shutil, os
 import pyodbc
-import pyautogui
 
 calc_depths = [1.5, 3., 4.5]
 
@@ -48,8 +47,13 @@ def getTable(tables, var, phi):
         #Let's interpolate
         return (tables[var][idx]-tables[var][idx-1])/(tables['phi'][idx]-tables['phi'][idx-1])*(phi-tables['phi'][idx-1])+tables[var][idx-1]
     
+def isCohesive(mat):
+    GI=mat[1]
+    if GI[0] in ['S','G']:
+        return False
+    return True
+    
 def terzagi_method(phi, gamma, Cu, calc_depth):
-    is_cohesive = phi<=0.1
     Nq = getTable(t_tables, 'nq', phi)
     Nc = getTable(t_tables, 'nc', phi)
     Ny = getTable(t_tables, 'ny', phi)
@@ -60,16 +64,13 @@ def terzagi_method(phi, gamma, Cu, calc_depth):
     c_term = 1.3* Cu*Nc
     q_term = q*Nq
     y_term = 0.4 * gamma * B * Ny
-    if is_cohesive:
-        y_term= 0.
     p = c_term + q_term + y_term
     #print(c_term,q_term,y_term)
     #print(mat)
-    return(p/3)
+    return((p-q)/3)
 
 #all three methods
 def meyerhof_method(phi, gamma, Cu, calc_depth):
-    is_cohesive = phi<=0.1
     Nq = getTable(m_tables, 'nq', phi)
     Nc = getTable(m_tables, 'nc', phi)
     Ny = getTable(m_tables, 'ny(m)', phi)
@@ -91,15 +92,12 @@ def meyerhof_method(phi, gamma, Cu, calc_depth):
     c_term = Cu*Nc*sc*dc
     q_term = q*Nq*sq*dq
     y_term = 0.5 * gamma * B * Ny*sy*dy
-    if is_cohesive:
-        y_term= 0.
     p = c_term + q_term + y_term
     #print(c_term,q_term,y_term)
     #print(mat)
-    return(p/3)
+    return((p-q)/3)
 
 def hansen_method(phi, gamma, Cu, calc_depth):
-    is_cohesive = phi<=0.1
     Nq = getTable(m_tables, 'nq', phi)
     Nc = getTable(m_tables, 'nc', phi)
     Ny = getTable(m_tables, 'ny(h)', phi)
@@ -118,15 +116,12 @@ def hansen_method(phi, gamma, Cu, calc_depth):
     c_term = Cu*Nc*sc*dc
     q_term = q*Nq*sq*dq
     y_term = 0.5 * gamma * B * Ny*sy*dy
-    if is_cohesive:
-        y_term= 0.
     p = c_term + q_term + y_term
     #print(c_term,q_term,y_term)
     #print(mat)
-    return(p/3)
+    return((p-q)/3)
 
 def vesic_method(phi, gamma, Cu, calc_depth):
-    is_cohesive = phi<=0.1
     Nq = getTable(m_tables, 'nq', phi)
     Nc = getTable(m_tables, 'nc', phi)
     Ny = getTable(m_tables, 'ny(v)', phi)
@@ -145,12 +140,10 @@ def vesic_method(phi, gamma, Cu, calc_depth):
     c_term = Cu*Nc*sc*dc
     q_term = q*Nq*sq*dq
     y_term = 0.5 * gamma * B * Ny*sy*dy
-    if is_cohesive:
-        y_term= 0.
     p = c_term + q_term + y_term
     #print(c_term,q_term,y_term)
     #print(mat)
-    return(p/3)
+    return((p-q)/3)
 
 def n_teng_method(N, calc_depth):
     B=2
@@ -159,6 +152,8 @@ def n_teng_method(N, calc_depth):
 def get_bearing_capacity(input_datas, calc_depth):
     mat = get_top_material(input_datas, calc_depth)
     phi = mat[2]
+    if isCohesive(mat):
+        phi=0.01
     gamma = mat[5]
     Cu = mat[4]
     N60 = mat[7]
@@ -198,6 +193,8 @@ def update_datas(input_datas):
         mat=get_top_material(input_datas, (i+1)/2)
         lname = str(i)
         phi = mat[2]
+        if isCohesive(mat):
+            phi=0.01
         c = mat[4]
         gamma = mat[5]
         nu = mat[6]
@@ -232,41 +229,19 @@ def update_data_cache():
     hwndMain = findWindow(window_class_main)
     time.sleep(0.5)
     win32gui.PostMessage(hwndMain, win32con.WM_COMMAND, 5, 0)
-    ##########win32gui.PostMessage(hwndMain, win32con.WM_COMMAND, 19, 0)
-    time.sleep(1)
-    oldpos = pyautogui.position()
-    pyautogui.click(518, 278)
-    pyautogui.click(841, 380)
-    pyautogui.moveTo(*oldpos)
-    time.sleep(0.5)
-    oldpos = pyautogui.position()
-    pyautogui.click(744, 380)
-    pyautogui.moveTo(*oldpos)
-
-    #for auto clicker
-    time.sleep(1)
+    time.sleep(1.25)#crack does it's work here
     win32gui.PostMessage(hwndMain, win32con.WM_COMMAND, 19, 0)
     p.wait()
 
 def plasix_method(input_datas):
     pass
     batch_program = "C:\\Program Files (x86)\\Plaxis8x\\batch.exe"
-    # Now make file ready
-    try:
-        shutil.copy(os.getcwd()+"\\helper\\backup\\BHLog.plx",os.getcwd()+"\\helper\\")
-    except:
-        print('Cannot create file')
-        pass
-    try:
-        shutil.copytree(os.getcwd()+"\\helper\\backup\\BHLog.DTA",os.getcwd()+"\\helper\\BHLog.DTA")
-    except:
-        print('Cannot create folder')
-        pass
     file = os.getcwd()+"\\helper\\BHLog.plx"
     #Remove old force datas
     force_data_file = "C:\\Program Files (x86)\\Plaxis8x\\force.txt"
     try:
-        os.unlink(force_data_file)
+        with open(force_data_file,'w') as f:
+            pass#make sure file exists
     except:
         pass
     update_datas(input_datas)
@@ -285,7 +260,7 @@ def plasix_method(input_datas):
     hwndMain = findWindow(window_class_main)
     win32gui.PostMessage(hwndMain, win32con.WM_COMMAND, 23, 0)
     # Wait for calculation to complete
-    inertia = 3# 3 runs
+    inertia = 4# 3 runs
     while True:
         wnd = findWindow(window_class_calculation)
         if wnd == 0:
@@ -298,18 +273,14 @@ def plasix_method(input_datas):
     win32gui.PostMessage(hwndMain, win32con.WM_COMMAND, 3, 0)
     win32gui.PostMessage(hwndMain, win32con.WM_COMMAND, 11, 0)
     p.wait()
-    try:
-        # now delete those files
-        shutil.rmtree(os.getcwd()+"\\helper\\BHLog.DTA")
-        os.unlink(os.getcwd()+"\\helper\\BHLog.plx")
-    except:
-        pass
     datas = []
     with open(force_data_file) as f:
         dat = f.read().splitlines()
-        for i in dat:
-            datas.append(float(i.split(' ')[1])*-2*math.pi/3)
-    return(datas[1:])
+        for h,i in enumerate(dat[1:]):
+            h = 1.5*(h+1)
+            gamma = get_top_material(input_datas,h)[5]
+            datas.append((float(i.split(' ')[1])*-2*math.pi-gamma*h)/3)
+        return datas
     
 def process_file(files):
     input_datas = files
@@ -330,16 +301,3 @@ def calculation(mat_file):
     for i in mat_file:
         results.append(process_file(i))
     return results
-#    helper.write_csv(file+'.afc', results)
-
-#files = helper.getMyFiles('mtl', '.')
-#files=files
-#for i in files:
-#    print()
-#    print('Loading file:', i[0])
-#    helper.give_file_hint(i[0])
-#    try:
-#        process_file(i)
-#    except helper.helper_exception:
-#        pass
-#helper.print_failed()
