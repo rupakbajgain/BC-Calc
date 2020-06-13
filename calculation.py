@@ -233,20 +233,24 @@ def update_data_cache():
     win32gui.PostMessage(hwndMain, win32con.WM_COMMAND, 19, 0)
     p.wait()
 
+def create_empty_file(name):
+    try:
+        with open(name,'w') as f:
+            pass
+    except:
+        pass
+
 def plasix_method(input_datas):
     pass
     batch_program = "C:\\Program Files (x86)\\Plaxis8x\\batch.exe"
     file = os.getcwd()+"\\helper\\BHLog.plx"
     #Remove old force datas
     force_data_file = "C:\\Program Files (x86)\\Plaxis8x\\force.txt"
-    try:
-        with open(force_data_file,'w') as f:
-            pass#make sure file exists
-    except:
-        pass
+    create_empty_file(force_data_file)
     update_datas(input_datas)
     update_data_cache()
     file="C:\\Program Files (x86)\\Plaxis8x\\Examples\\BHLog.plx"
+    create_empty_file(force_data_file)
     p=subprocess.Popen([batch_program, file])
     time.sleep(0.5)
     window_class_main = 'TBatchFrm'
@@ -256,19 +260,20 @@ def plasix_method(input_datas):
         time.sleep(0.5)
     # get main window hwnd, print(hwndMain)
     #calculate
-    time.sleep(1.5)#more data more time to load,1.5:ok
+    time.sleep(1.25)#more data more time to load,1.5:ok
     hwndMain = findWindow(window_class_main)
     win32gui.PostMessage(hwndMain, win32con.WM_COMMAND, 23, 0)
-    # Wait for calculation to complete
-    inertia = 4# 3 runs
+    #check for 4 lines on that file
     while True:
-        wnd = findWindow(window_class_calculation)
-        if wnd == 0:
-            if inertia:
-                inertia -= 1
-            else:
-                break
-        time.sleep(0.75)# let's save some times this miss
+        time.sleep(0.75)
+        try:
+            with open(force_data_file) as f:
+                data = f.read()
+                if len(data.splitlines())>3:
+                    break
+        except:
+            pass
+    time.sleep(0.5)
     #save and exit
     win32gui.PostMessage(hwndMain, win32con.WM_COMMAND, 3, 0)
     win32gui.PostMessage(hwndMain, win32con.WM_COMMAND, 11, 0)
@@ -280,7 +285,8 @@ def plasix_method(input_datas):
             h = 1.5*(h+1)
             gamma = get_top_material(input_datas,h)[5]
             datas.append((float(i.split(' ')[1])*-2*math.pi-gamma*h)/3)
-        return datas
+    os.unlink(force_data_file)
+    return datas
     
 def process_file(files):
     input_datas = files

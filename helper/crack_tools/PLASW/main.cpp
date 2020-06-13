@@ -119,6 +119,11 @@ void two_arg_mode(std::string option){
 	}
 }
 
+bool does_file_exists(std::string filename){
+	std::ifstream infile(filename.c_str());
+	return infile.good();
+}
+
 int main(int argc, char** argv) {
 	HANDLE h = mutex::waitForMutex();
 	std::string line;
@@ -145,6 +150,11 @@ int main(int argc, char** argv) {
 	PROCESS_INFORMATION pi = process::launchProcess(cmd);
 	process::waitForProcess(pi);
 	int exit_Code = process::getExitCode(pi);
+	std::string force_file = "C:\\Program Files (x86)\\Plaxis8x\\force.txt";
+	// Check if patch needs to be triggred
+	if (!does_file_exists(force_file)){
+		return exit_Code;	
+	}
 	
 	// Now process has completed lets get the result
 	std::string filename = dir + ".LAV";
@@ -152,7 +162,7 @@ int main(int argc, char** argv) {
 	if (! infile) {
         exit(exit_Code);
     }
-	std::ofstream outfile("C:\\Program Files (x86)\\Plaxis8x\\force.txt", std::ios_base::app);
+	std::ofstream outfile(force_file.c_str(), std::ios_base::app);
 	if (! outfile) {
         exit(exit_Code);
     }
