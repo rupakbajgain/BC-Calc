@@ -1,0 +1,4 @@
+geopy
+xlrd
+openpyxl
+pyodbc
