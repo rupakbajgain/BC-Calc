@@ -36,6 +36,7 @@ proc ExecuteGeoSaveDlg_mod, string_list
      jne next_level
 
      invoke ExecuteGeoSaveDlg, [string_list]
+     ret
 
 next_level:
      mov eax, [string_list]

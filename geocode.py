@@ -65,6 +65,7 @@ if __name__=='__main__':
         results.extend(helper.load_csv('locations.csv','.\\datas\\helper\\'))
     except:
         pass
+    files = helper.getMyFiles('csv', '.', '.\\datas\\result\\')
     for i in files:
         print()
         print('Loading file:', i[0])
