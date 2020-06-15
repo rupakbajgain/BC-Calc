@@ -42,17 +42,30 @@ def get_location(loc):
     return (lat, long)
 
 results = []
+results15 = []
+results30 = []
+results45 = []
 def process_file(files):
     filename, file = files
     input_datas = helper.load_csv(filename,'.\\datas\\result\\')
     loc = input_datas[0][1]
     lat,long = get_location(loc)
     for i in range(1,4):
-        results.append((file,loc,input_datas[1][i],input_datas[2][i],input_datas[3][i],input_datas[4][i],input_datas[5][i],input_datas[6][i],input_datas[7][i],lat,long))
+        m=min(float(input_datas[2][i]),float(input_datas[3][i]),float(input_datas[4][i]),float(input_datas[5][i]),float(input_datas[6][i]),float(input_datas[7][i]))
+        results.append((file,loc,input_datas[1][i],input_datas[2][i],input_datas[3][i],input_datas[4][i],input_datas[5][i],input_datas[6][i],input_datas[7][i],lat,long,m))
+        if i==1:
+            results15.append((lat,long,m))
+        elif i==2:
+            results30.append((lat,long,m))
+        elif i==3:
+            results45.append((lat,long,m))    
     results.append(())
     filtered = []
 
-results.append(['file','location','depth','terzaghi','meyerhof','hansen','vesic','teng','plasix','lat','long'])
+results.append(['file','location','depth','terzaghi','meyerhof','hansen','vesic','teng','plasix','lat','long','min'])
+results15.append(['latitude','longitude','BC'])
+results30.append(['latitude','longitude','BC'])
+results45.append(['latitude','longitude','BC'])
 if __name__=='__main__':
     files = helper.getMyFiles('csv', '.', '.\\datas\\result\\')
     locations = helper.load_csv('locations.csv','.\\datas\\helper\\')
@@ -67,3 +80,6 @@ if __name__=='__main__':
             pass
     helper.print_failed()
     helper.write_csv('result.csv',results,'.\\datas\\')
+    helper.write_csv('result15.csv',results15,'.\\datas\\')
+    helper.write_csv('result30.csv',results30,'.\\datas\\')
+    helper.write_csv('result45.csv',results45,'.\\datas\\')

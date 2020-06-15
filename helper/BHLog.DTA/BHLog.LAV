@@ -1,0 +1,684 @@
+ Blocksize of this file :  8192
+ Last SRC-file : INPCGAMP 05-Jul-2002 09:16:30
+ Last compiled : Friday 05-Jul-2002 09:25:45
+ File Version  : 8.0.0.1
+ User : Koxhiyoki Kabuto, Japan
+ Code : 7P105PKD 5d64c9d5
+ isNT   :  1
+ iMajor :  6
+ iMinor :  1
+ iBuild :  7601
+ GlMemStat  1
+  1          32        0.03      0.000  sizeof(MEMORYSTATUS)
+  2          35        0.03      0.000  percent of memory in use
+  3  4187058176  4088924.00   3993.090  bytes of physical memory
+  4  2709499904  2645996.00   2583.980  free physical memory bytes
+  5  4294967295  4194304.00   4096.000  bytes of paging file
+  6  4294967295  4194304.00   4096.000  free bytes of paging file
+  7  2147352576  2097024.00   2047.875  user bytes of address space
+  8  2073837568  2025232.00   1977.766  free user bytes
+ End of GlMemStat
+Time 22:55:59.78
+  INFORMATION FROM PLASNEW:
+ IHAND,NDOF :  7 2
+ BatStr : Dead Load                                                               
+ ib_Size =  5096
+ opening file : C:\Program Files (x86)\Plaxis8x\Examples\BHLog.DTA\BHLog.INP Read  0
+ ib_Size =  5096
+ opening file : C:\Program Files (x86)\Plaxis8x\Examples\BHLog.DTA\BHLog.MSH Read  0
+ Size MBEL :  1
+ ib_Size =  5096
+ opening file : C:\Program Files (x86)\Plaxis8x\Examples\BHLog.DTA\BHLog.INP Read  0
+ ib_Size =  5096
+ opening file : C:\Program Files (x86)\Plaxis8x\Examples\BHLog.DTA\BHLog.MSH Read  0
+ ib_Size =  5096
+ opening file : C:\Program Files (x86)\Plaxis8x\Examples\BHLog.DTA\BHLog.W00 Read  0
+ GW_dum  ios= 0
+ NGWIPts =  120
+ NConsBC =  160
+ RDGW_ A
+ ib_Size =  5096
+ opening file : C:\Program Files (x86)\Plaxis8x\Examples\BHLog.DTA\BHLog.W00 Read  0
+ Read UDWPRESR
+ +- iClus      p_Ref   y_Ref       p_Inc
+ nVals =  96
+  i1    :  0
+  i2    :  0
+  iNxx  :  0
+  iStat :  -1
+ ibks,ibkst :  11 39
+ unit  11  open?  F
+ Resulting free unit  11
+ ib_Size =  5096
+ opening file : C:\Program Files (x86)\Plaxis8x\Examples\BHLog.DTA\BHLog.N00 Read  0
+ RDNxx:$$WCONFILI## 4
+ Reading block $$WCONFILI##
+ RDNxx:$$ITERCALI## 4
+ Reading block $$ITERCALI##
+ RDNxx:$$ITERCALR## 24
+ Reading block $$ITERCALR##
+ RDNxx:$$ACTIVEPR## 9216
+ Reading block $$ACTIVEPR##
+ RDNxx:$$ACTIVEHR## 6664
+ Reading block $$ACTIVEHR##
+ RDNxx:$$PHREATFR## 32
+ Unknown block $$PHREATFR##  32
+ RDNxx:$$ENDOFFII## 0
+ ibks,ibkst :  5 7
+ unit  10  open?  F
+ Resulting free unit  10
+ ib_Size =  5096
+ opening file : C:\Program Files (x86)\Plaxis8x\Examples\BHLog.DTA\BHLog.MAT Read  0
+ unit  10  open?  F
+ Resulting free unit  10
+ ib_Size =  5096
+ opening file : C:\Program Files (x86)\Plaxis8x\Examples\BHLog.DTA\BHLog.MAT Read  0
+ After RdMatW
+ PropSoil:
+ 
+Set                  1            2            3            4            5
+MTypeL             152          152          152          152          152
+   1       3.84615E+02  3.84615E+02  3.84615E+02  3.84615E+02  3.84615E+02
+   2       3.00000E-01  3.00000E-01  3.00000E-01  3.00000E-01  3.00000E-01
+   3       1.74533E-04  1.74533E-04  1.74533E-04  1.74533E-04  1.74533E-04
+   4       2.10000E-01  2.10000E-01  2.10000E-01  2.10000E-01  2.10000E-01
+   5       0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00
+   6       0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00
+   7       0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00
+   8       0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00
+   9       0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00
+  10       0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00
+  11       0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00
+  12       0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00
+  13       1.00000E+00  1.00000E+00  1.00000E+00  1.00000E+00  1.00000E+00
+  14       1.00000E+02  1.00000E+02  1.00000E+02  1.00000E+02  1.00000E+02
+  15       0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00
+  16       0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00
+  17       0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00
+  18       0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00
+  19       0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00
+  20       3.33333E-01  3.33333E-01  3.33333E-01  3.33333E-01  3.33333E-01
+  21       0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00
+  22       9.99000E-01  9.99000E-01  9.99000E-01  9.99000E-01  9.99000E-01
+  23       0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00
+  24       4.50000E-01  4.50000E-01  4.50000E-01  4.50000E-01  4.50000E-01
+  25       0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00
+  26       0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00
+  27       1.00000E+15  1.00000E+15  1.00000E+15  1.00000E+15  1.00000E+15
+  28       4.95000E-01  4.95000E-01  4.95000E-01  4.95000E-01  4.95000E-01
+ 
+Set                  6            7            8            9           10
+MTypeL             152          152          152          152          152
+   1       3.84615E+02  3.84615E+02  3.84615E+02  3.84615E+02  3.84615E+02
+   2       3.00000E-01  3.00000E-01  3.00000E-01  3.00000E-01  3.00000E-01
+   3       1.74533E-04  1.74533E-04  1.74533E-04  1.74533E-04  1.74533E-04
+   4       2.10000E-01  2.10000E-01  2.10000E-01  2.10000E-01  2.10000E-01
+   5       0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00
+   6       0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00
+   7       0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00
+   8       0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00
+   9       0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00
+  10       0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00
+  11       0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00
+  12       0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00
+  13       1.00000E+00  1.00000E+00  1.00000E+00  1.00000E+00  1.00000E+00
+  14       1.00000E+02  1.00000E+02  1.00000E+02  1.00000E+02  1.00000E+02
+  15       0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00
+  16       0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00
+  17       0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00
+  18       0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00
+  19       0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00
+  20       3.33333E-01  3.33333E-01  3.33333E-01  3.33333E-01  3.33333E-01
+  21       0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00
+  22       9.99000E-01  9.99000E-01  9.99000E-01  9.99000E-01  9.99000E-01
+  23       0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00
+  24       4.50000E-01  4.50000E-01  4.50000E-01  4.50000E-01  4.50000E-01
+  25       0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00
+  26       0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00  0.00000E+00
+  27       1.00000E+15  1.00000E+15  1.00000E+15  1.00000E+15  1.00000E+15
+  28       4.95000E-01  4.95000E-01  4.95000E-01  4.95000E-01  4.95000E-01
+ 
+Set                 11           12
+MTypeL             152          152
+   1       3.84615E+02  3.84615E+02
+   2       3.00000E-01  3.00000E-01
+   3       1.74533E-04  1.74533E-04
+   4       2.10000E-01  2.10000E-01
+   5       0.00000E+00  0.00000E+00
+   6       0.00000E+00  0.00000E+00
+   7       0.00000E+00  0.00000E+00
+   8       0.00000E+00  0.00000E+00
+   9       0.00000E+00  0.00000E+00
+  10       0.00000E+00  0.00000E+00
+  11       0.00000E+00  0.00000E+00
+  12       0.00000E+00  0.00000E+00
+  13       1.00000E+00  1.00000E+00
+  14       1.00000E+02  1.00000E+02
+  15       0.00000E+00  0.00000E+00
+  16       0.00000E+00  0.00000E+00
+  17       0.00000E+00  0.00000E+00
+  18       0.00000E+00  0.00000E+00
+  19       0.00000E+00  0.00000E+00
+  20       3.33333E-01  3.33333E-01
+  21       0.00000E+00  0.00000E+00
+  22       9.99000E-01  9.99000E-01
+  23       0.00000E+00  0.00000E+00
+  24       4.50000E-01  4.50000E-01
+  25       0.00000E+00  0.00000E+00
+  26       0.00000E+00  0.00000E+00
+  27       1.00000E+15  1.00000E+15
+  28       4.95000E-01  4.95000E-01
+ MTypeL A
+     152  152  152  152  152     152  152  152  152  152
+     152  152
+ ib_Size =  5096
+ opening file : C:\Program Files (x86)\Plaxis8x\Examples\BHLog.DTA\BHLog.SF4 Read  0
+ $$CALSTEPI## 20
+ $$NFIRST I## 4
+ $$CALTYPEI## 16
+  LPHIC,ILDEF,ICSTAG,IDISP  0 0 0 1
+  nDof :  2
+ $$CALCTRLR## 24
+ $$CALCTRLI## 32
+ $$ADDCTRLI## 40
+ $$IGNUNDRI## 4
+ $$ULTIMTNR## 88
+Ult D  LA LB    :   1.00000E+00  1.00000E+00  1.00000E+00
+Ult T  G  H  SF :   0.00000E+00  1.00000E+00  0.00000E+00  1.00000E+00
+Ult DA C1 C2 SC :   0.00000E+00  0.00000E+00  0.00000E+00  1.00000E+00
+ $$ELEMSWTI## 48
+ $$OCR_POPR## 192
+ $$LOADINNR## 96
+ $$TIMEFACI## 4
+ $$ISETGWNI## 4
+ $$DYNCALCR## 56
+ $$DYNAMICR## 96
+ $$PHASEINR## 80
+ fLAUlt :  1.000000000000000
+ DSA(1) :  0.000000000000000E+00
+ fLBUlt :  1.000000000000000
+ fG Ult :  1.000000000000000
+ fLTUlt :  0.000000000000000E+00
+ unit  10  open?  F
+ Resulting free unit  10
+ ib_Size =  5096
+ opening file : C:\Program Files (x86)\Plaxis8x\Examples\BHLog.DTA\BHLog.L00 Read  0
+ Unknown block [Lxx]: $$VISCOUSI##
+ Unknown block [Lxx]: $$HINGES I##
+ MTypeL B
+     152  152  152  152  152     152  152  152  152  152
+     152  152
+ 12 52
+ 12 2
+ Cluster,iElSet,iMod 1 12 2 102
+ 11 52
+ 11 2
+ Cluster,iElSet,iMod 2 11 2 102
+ 10 52
+ 10 2
+ Cluster,iElSet,iMod 3 10 2 102
+ 9 52
+ 9 2
+ Cluster,iElSet,iMod 4 9 2 102
+ 8 52
+ 8 2
+ Cluster,iElSet,iMod 5 8 2 102
+ 7 52
+ 7 2
+ Cluster,iElSet,iMod 6 7 2 102
+ 6 52
+ 6 2
+ Cluster,iElSet,iMod 7 6 2 102
+ 5 52
+ 5 2
+ Cluster,iElSet,iMod 8 5 2 102
+ 4 52
+ 4 2
+ Cluster,iElSet,iMod 9 4 2 102
+ 3 52
+ 3 2
+ Cluster,iElSet,iMod 10 3 2 102
+ 2 52
+ 2 2
+ Cluster,iElSet,iMod 11 2 2 102
+ 1 52
+ 1 2
+ Cluster,iElSet,iMod 12 1 2 102
+ MTypeL C
+     102  102  102  102  102     102  102  102  102  102
+     102  102
+ IsInt
+
+ UpdWPres
+ UpdWPres End
+ ib_Size =  5096
+ opening file : C:\Program Files (x86)\Plaxis8x\Examples\BHLog.DTA\BHLog.000 Read  0
+ ib_Size =  5096
+ opening file : C:\Program Files (x86)\Plaxis8x\Examples\BHLog.DTA\BHLog.000 Read  0
+ iPrevCalc :  0
+ Skipping [XXX]$$DUTOTPHR##
+ Skipping [XXX]$$SOILSETI##
+ Skipping [XXX]$$DT_CRITR##
+ Skipping [XXX]$$CAMDPMDR##
+ Skipping [XXX]$$E__C___R##
+ Skipping [XXX]$$LXXFILEI##
+ iCurCalc  :  7
+ iLDef     :  0
+ ParmSA :  1.000000000000000
+ DSA0   :  0.000000000000000E+00
+ ParmSB :  1.000000000000000
+ ParmG  :  0.000000000000000E+00
+ Init_Pc_GamP 0
+ AddCxx
+ unit  21  open?  F
+ Resulting free unit  21
+ Deleting old Cxx-file
+ ib_Size =  5096
+ opening file : C:\Program Files (x86)\Plaxis8x\Examples\BHLog.DTA\BHLog.CXX Write  0
+ bkhead:$$S000000H## 568
+ BkHead : $$S000000H## 568
+ showcalcform
+ t1 : [C:\Program Files (x86)\Plaxis8x\Examples\BHLog.DTA\BHLog] 56
+ Na ShowCalcForm
+ Info1
+ NNN    in Info 1 :  0
+ nFirst in Info 1 :  1
+ NSubT  in Info 1 :  1
+ Info2 A
+ Info2 B
+ Info2 A
+ Info2 B
+ 292   1.1250   2.0000 uTot0:   0.00000E+00  0.00000E+00
+   1   0.0000   0.0000 uTot0:   0.00000E+00  0.00000E+00
+ UpdWPres
+ UpdWPres End
+  ProfilN : nDof =  2
+ ProfilN:  45815
+ ProfilN xMat :  45815.00000000000  values
+ Profile      :  357.9296875000000  kB 
+ Profile      :  0.3495407104492187  MB
+ n            :  1090   avg band :  42.03211009174312
+ Flops decomp  :   1.0686070E+06
+ Flops backsub :   9.1630000E+04
+  NMAT= 45815  NREAD1= 17280  NREAD2= 13824
+  iError =  0
+ InitDS, LADV,LTYPE :  1 1
+ InitDS DSA(1) :  0.000000000000000E+00
+ InitDS DT (1) :  0.000000000000000E+00
+ Ladv0,lType,nDof: 1 1 2
+ UltDS DSA(1) :  0.000000000000000E+00
+ 1A : dT :  0.000000000000000E+00
+ ICSTAG= 0
+
+NSTEP=   1
+ 100A : dT :  0.000000000000000E+00 0.000000000000000E+00
+ LoadAc start Active
+   0.000E+00  0.000E+00  0.000E+00   0.000E+00  0.000E+00  0.000E+00
+   0.000E+00  0.000E+00  0.000E+00   0.000E+00  0.000E+00
+ LoadAc end   Active
+   0.000E+00  0.000E+00  0.000E+00   0.000E+00  0.000E+00  1.000E+00
+   0.000E+00  0.000E+00  0.000E+00   0.000E+00  0.000E+00
+ LoadAc DSA(i) :  0.000000000000000E+00
+ LoadAc DSC    :  0.000000000000000E+00
+Active   0.000E+00  0.000E+00  0.000E+00   0.000E+00  0.000E+00  1.000E+00
+         0.000E+00  0.000E+00  0.000E+00   0.000E+00  0.000E+00
+ UITIT : F
+Time 22:56:00.06       0.28
+ FMAMAT T
+ iLDef :  0  iel  1
+ SymDif/Sum 1 :   1.43436E-11  1.29450E+05  2.49757E+04
+ SymDif/Sum   :   6.32547E-09  5.83723E+07  1.23979E+07
+nmat      45815 ->      42307 ( 92.34 %)
+ Time for forming matrix:
+Time 22:56:00.25       0.19
+  iMat     :  3
+Decomp :   0.05 s
+ Time for decomposing:
+Time 22:56:00.30       0.05
+ Calling FormGH
+ GNorm  :  161.2330086819631
+ GSum   :  0.1647860149101013 6.878846425305765
+ After FormGH
+ iBack 2
+ dTime in Constit :  0.000000000000000E+00
+S1,S3,TauMax: -9.0441E-07  7.1054E-15  5.0000E-01
+dt GetSig :  0.01 s 1152
+ ITER=    1  ERROR= 1.303E+00  ERRLOC= 1.754E+01  NPLAS=1152  NINAC=1152
+            FACTOR= 1.000E+00  ERRLCI= 0.000E+00  NPINT=   0  INACI=   0
+            CSP   = 1.000E+00  EGLM  = 0.000E+00  NPLBM=   0
+
+ iTest :  1
+ iBack 2
+ dTime in Constit :  0.000000000000000E+00
+S1,S3,TauMax: -4.5220E-07  3.5527E-15  5.0000E-01
+dt GetSig :  0.00 s 1152
+ ITER=    1  ERROR= 1.303E+00  ERRLOC= 8.770E+00  NPLAS=1152  NINAC=1152
+            FACTOR= 1.000E+00  ERRLCI= 0.000E+00  NPINT=   0  INACI=   0
+            CSP   = 1.000E+00  EGLM  = 0.000E+00  NPLBM=   0
+
+ iTest :  2
+ iBack 2
+ dTime in Constit :  0.000000000000000E+00
+S1,S3,TauMax:  0.0000E+00  0.0000E+00  5.0000E-01
+dt GetSig :  0.00 s 1152
+ ITER=    1  ERROR= 0.000E+00  ERRLOC= 0.000E+00  NPLAS=   0  NINAC=   0
+            FACTOR= 1.000E+00  ERRLCI= 0.000E+00  NPINT=   0  INACI=   0
+            CSP   = 1.000E+00  EGLM  = 0.000E+00  NPLBM=   0
+
+ iTest :  3
+  Estimation of step size at step 1
+Step size :    0.00192
+Step size :    0.00029
+Step size :    0.00100
+ iBack 2
+ dTime in Constit :  0.000000000000000E+00
+S1,S3,TauMax: -1.8088E-09  2.0817E-17  5.0000E-01
+dt GetSig :  0.01 s 1152
+ ITER=    1  ERROR= 2.100E-01  ERRLOC= 3.508E-02  NPLAS=1124  NINAC= 988
+            FACTOR= 1.000E+00  ERRLCI= 0.000E+00  NPINT=   0  INACI=   0
+            CSP   = 1.000E+00  EGLM  = 0.000E+00  NPLBM=   0
+
+ Info2 A
+ Info2 B
+ iBack 2
+ iBack 3
+ dTime in Constit :  0.000000000000000E+00
+S1,S3,TauMax: -1.3145E-09  6.9389E-18  5.0000E-01
+dt GetSig :  0.00 s 1152
+ ITER=    2  ERROR= 5.837E-07  ERRLOC= 3.483E-09  NPLAS=1124  NINAC=   0
+            FACTOR=-8.468E-09  ERRLCI= 0.000E+00  NPINT=   0  INACI=   0
+            CSP   = 1.000E+00  EGLM  = 0.000E+00  NPLBM=   0
+
+ Info2 A
+ Info2 B
+  A SCALE UP ITER= 2
+UPD1: SCFAC =     2.00000
+ dTime in Constit :  0.000000000000000E+00
+S1,S3,TauMax: -2.6289E-09  1.3878E-17  5.0000E-01
+dt GetSig :  0.00 s 1152
+ ITER=    3  ERROR= 1.167E-06  ERRLOC= 3.508E-02  NPLAS=1132  NINAC= 988
+            FACTOR=-8.468E-09  ERRLCI= 0.000E+00  NPINT=   0  INACI=   0
+            CSP   = 1.000E+00  EGLM  = 0.000E+00  NPLBM=   0
+
+ Info2 A
+ Info2 B
+ iBack 2
+ iBack 3
+ dTime in Constit :  0.000000000000000E+00
+S1,S3,TauMax: -2.0223E-09  2.0817E-17  5.0000E-01
+dt GetSig :  0.00 s 1152
+ ITER=    4  ERROR= 7.179E-07  ERRLOC= 4.035E-09  NPLAS=1132  NINAC=   0
+            FACTOR= 5.255E-10  ERRLCI= 0.000E+00  NPINT=   0  INACI=   0
+            CSP   = 1.000E+00  EGLM  = 0.000E+00  NPLBM=   0
+
+ Info2 A
+ Info2 B
+ UITIT,ULTNIL: F F
+ CSP :   2.17532E-14  9.30787E-19  4.27885E-05
+ ClustVol
+ End ClustVol
+ ib_Size =  5096
+ opening file : C:\Program Files (x86)\Plaxis8x\Examples\BHLog.DTA\BHLog.001 Write  0
+ J in WtXXX 0 0 5
+ Used kB:  140  kB
+ AddCxx
+ unit  21  open?  F
+ Resulting free unit  21
+ First time in this routine
+ ib_Size =  4001
+ opening file : C:\Program Files (x86)\Plaxis8x\Examples\BHLog.DTA\BHLog.CXX ReadWrite  0
+ All previous read
+ bkhead:$$S000001H## 1400
+ BkHead : $$S000001H## 1400
+ ib_Size =  4001
+ unit  10  open?  F
+ Resulting free unit  10
+ opening file : C:\Program Files (x86)\Plaxis8x\Examples\BHLog.DTA\BHLog.SF4 Write  0
+ IMult =  6
+ Call Step_Ready
+ After Call Step_Ready
+Time for this step :     0.380 s
+
+NSTEP=   2
+ 100A : dT :  0.000000000000000E+00 0.000000000000000E+00
+ LoadAc start Active
+   0.000E+00  0.000E+00  0.000E+00   0.000E+00  0.000E+00  1.000E+00
+   0.000E+00  0.000E+00  0.000E+00   0.000E+00  0.000E+00
+ Mactiv 5
+ LoadAc end   Active
+   0.000E+00  0.000E+00  0.000E+00   0.000E+00  0.000E+00  1.000E+00
+   0.000E+00  0.000E+00  0.000E+00   0.000E+00  0.000E+00
+ LoadAc DSA(i) :  0.000000000000000E+00
+ LoadAc DSC    :  0.000000000000000E+00
+Active   0.000E+00  0.000E+00  0.000E+00   0.000E+00  0.000E+00  1.000E+00
+         0.000E+00  0.000E+00  0.000E+00   0.000E+00  0.000E+00
+ UITIT : F
+ SCFAC,CHSUB 1.000000000000000 1.000000000000000
+ SCFACG      1.000000000000000
+UPD2: CHDUM =   1.00000E+00  1.00000E+00
+ Updown DSA(i) :  0.000000000000000E+00
+ dTime in Constit :  0.000000000000000E+00
+S1,S3,TauMax: -4.0445E-09  1.3878E-17  5.0000E-01
+dt GetSig :  0.00 s 1152
+ ITER=    1  ERROR= 1.436E-06  ERRLOC= 7.016E-02  NPLAS=1132  NINAC=1076
+            FACTOR= 5.255E-10  ERRLCI= 0.000E+00  NPINT=   0  INACI=   0
+            CSP   = 2.175E-14  EGLM  = 0.000E+00  NPLBM=   0
+
+ Info2 A
+ Info2 B
+ iBack 2
+ iBack 3
+ dTime in Constit :  0.000000000000000E+00
+S1,S3,TauMax: -3.2611E-09  4.1633E-17  5.0000E-01
+dt GetSig :  0.00 s 1152
+ ITER=    2  ERROR= 8.761E-07  ERRLOC= 5.056E-09  NPLAS=1132  NINAC=   0
+            FACTOR= 3.376E-09  ERRLCI= 0.000E+00  NPINT=   0  INACI=   0
+            CSP   = 2.175E-14  EGLM  = 0.000E+00  NPLBM=   0
+
+ Info2 A
+ Info2 B
+  A SCALE UP ITER= 2
+UPD1: SCFAC =     2.00000
+ dTime in Constit :  0.000000000000000E+00
+S1,S3,TauMax: -4.5000E-09  5.5511E-17  5.0000E-01
+dt GetSig :  0.00 s 1152
+ ITER=    3  ERROR= 1.070E-06  ERRLOC= 7.016E-02  NPLAS=1136  NINAC=1076
+            FACTOR= 3.376E-09  ERRLCI= 0.000E+00  NPINT=   0  INACI=   0
+            CSP   = 2.175E-14  EGLM  = 0.000E+00  NPLBM=   0
+
+ Info2 A
+ Info2 B
+ iBack 2
+ iBack 3
+ dTime in Constit :  0.000000000000000E+00
+S1,S3,TauMax: -3.8365E-09  5.5511E-17  5.0000E-01
+dt GetSig :  0.00 s 1152
+ ITER=    4  ERROR= 6.776E-07  ERRLOC= 4.026E-09  NPLAS=1136  NINAC=   0
+            FACTOR= 2.161E-09  ERRLCI= 0.000E+00  NPINT=   0  INACI=   0
+            CSP   = 2.175E-14  EGLM  = 0.000E+00  NPLBM=   0
+
+ Info2 A
+ Info2 B
+ UITIT,ULTNIL: F F
+ CSP :   1.98590E-15  3.39896E-19  1.71154E-04
+ ClustVol
+ End ClustVol
+ ib_Size =  4001
+ opening file : C:\Program Files (x86)\Plaxis8x\Examples\BHLog.DTA\BHLog.002 Write  0
+ J in WtXXX 0 0 5
+ Used kB:  128  kB
+ AddCxx
+ unit  21  open?  F
+ Resulting free unit  21
+ ib_Size =  4096
+ opening file : C:\Program Files (x86)\Plaxis8x\Examples\BHLog.DTA\BHLog.CXX ReadWrite  0
+ Skipping  2080  bytes
+ bkhead:$$S000002H## 1400
+ BkHead : $$S000002H## 1400
+ ib_Size =  4096
+ unit  10  open?  F
+ Resulting free unit  10
+ opening file : C:\Program Files (x86)\Plaxis8x\Examples\BHLog.DTA\BHLog.SF4 Write  0
+ Call Step_Ready
+ After Call Step_Ready
+Time for this step :     0.090 s
+
+NSTEP=   3
+ 100A : dT :  0.000000000000000E+00 0.000000000000000E+00
+ LoadAc start Active
+   0.000E+00  0.000E+00  0.000E+00   0.000E+00  0.000E+00  1.000E+00
+   0.000E+00  0.000E+00  0.000E+00   0.000E+00  0.000E+00
+ Mactiv 5
+ LoadAc end   Active
+   0.000E+00  0.000E+00  0.000E+00   0.000E+00  0.000E+00  1.000E+00
+   0.000E+00  0.000E+00  0.000E+00   0.000E+00  0.000E+00
+ LoadAc DSA(i) :  0.000000000000000E+00
+ LoadAc DSC    :  0.000000000000000E+00
+Active   0.000E+00  0.000E+00  0.000E+00   0.000E+00  0.000E+00  1.000E+00
+         0.000E+00  0.000E+00  0.000E+00   0.000E+00  0.000E+00
+ UITIT : F
+ SCFAC,CHSUB 1.000000000000000 1.000000000000000
+ SCFACG      1.000000000000000
+UPD2: CHDUM =   1.00000E+00  1.00000E+00
+ Updown DSA(i) :  0.000000000000000E+00
+ dTime in Constit :  0.000000000000000E+00
+S1,S3,TauMax: -5.6507E-09  2.7756E-17  5.0000E-01
+dt GetSig :  0.00 s 1152
+ ITER=    1  ERROR= 9.369E-07  ERRLOC= 1.403E-01  NPLAS=1136  NINAC=1108
+            FACTOR= 2.161E-09  ERRLCI= 0.000E+00  NPINT=   0  INACI=   0
+            CSP   = 1.986E-15  EGLM  = 0.000E+00  NPLBM=   0
+
+ Info2 A
+ Info2 B
+ iBack 2
+ iBack 3
+ dTime in Constit :  0.000000000000000E+00
+S1,S3,TauMax: -5.0174E-09  2.4652E-32  5.0000E-01
+dt GetSig :  0.00 s 1152
+ ITER=    2  ERROR= 5.672E-07  ERRLOC= 3.377E-09  NPLAS=1136  NINAC=   0
+            FACTOR= 1.702E-10  ERRLCI= 0.000E+00  NPINT=   0  INACI=   0
+            CSP   = 1.986E-15  EGLM  = 0.000E+00  NPLBM=   0
+
+ Info2 A
+ Info2 B
+  A SCALE UP ITER= 2
+UPD1: SCFAC =     2.00000
+ dTime in Constit :  0.000000000000000E+00
+S1,S3,TauMax: -6.1983E-09  1.1102E-16  5.0000E-01
+dt GetSig :  0.00 s 1152
+ ITER=    3  ERROR= 7.322E-07  ERRLOC= 1.403E-01  NPLAS=1152  NINAC=1108
+            FACTOR= 1.702E-10  ERRLCI= 0.000E+00  NPINT=   0  INACI=   0
+            CSP   = 1.986E-15  EGLM  = 0.000E+00  NPLBM=   0
+
+ Info2 A
+ Info2 B
+ iBack 2
+ iBack 3
+ dTime in Constit :  0.000000000000000E+00
+S1,S3,TauMax: -5.5376E-09  1.6653E-16  5.0000E-01
+dt GetSig :  0.00 s 1152
+ ITER=    4  ERROR= 4.540E-07  ERRLOC= 2.487E-09  NPLAS=1152  NINAC=   0
+            FACTOR=-5.004E-10  ERRLCI= 0.000E+00  NPINT=   0  INACI=   0
+            CSP   = 1.986E-15  EGLM  = 0.000E+00  NPLBM=   0
+
+ Info2 A
+ Info2 B
+ UITIT,ULTNIL: F F
+ CSP :   5.90823E-16  4.04487E-19  6.84616E-04
+ ClustVol
+ End ClustVol
+ ib_Size =  4096
+ opening file : C:\Program Files (x86)\Plaxis8x\Examples\BHLog.DTA\BHLog.003 Write  0
+ J in WtXXX 0 0 5
+ Used kB:  128  kB
+ AddCxx
+ unit  21  open?  F
+ Resulting free unit  21
+ ib_Size =  4096
+ opening file : C:\Program Files (x86)\Plaxis8x\Examples\BHLog.DTA\BHLog.CXX ReadWrite  0
+ Skipping  3496  bytes
+ bkhead:$$S000003H## 1400
+ BkHead : $$S000003H## 1400
+ ib_Size =  4096
+ unit  10  open?  F
+ Resulting free unit  10
+ opening file : C:\Program Files (x86)\Plaxis8x\Examples\BHLog.DTA\BHLog.SF4 Write  0
+ Call Step_Ready
+ After Call Step_Ready
+Time for this step :     0.100 s
+
+NSTEP=   4
+ 100A : dT :  0.000000000000000E+00 0.000000000000000E+00
+ LoadAc start Active
+   0.000E+00  0.000E+00  0.000E+00   0.000E+00  0.000E+00  1.000E+00
+   0.000E+00  0.000E+00  0.000E+00   0.000E+00  0.000E+00
+ Mactiv 5
+ LoadAc end   Active
+   0.000E+00  0.000E+00  0.000E+00   0.000E+00  0.000E+00  1.000E+00
+   0.000E+00  0.000E+00  0.000E+00   0.000E+00  0.000E+00
+ LoadAc DSA(i) :  0.000000000000000E+00
+ LoadAc DSC    :  0.000000000000000E+00
+Active   0.000E+00  0.000E+00  0.000E+00   0.000E+00  0.000E+00  1.000E+00
+         0.000E+00  0.000E+00  0.000E+00   0.000E+00  0.000E+00
+ UITIT : F
+ SCFAC,CHSUB 1.000000000000000 1.000000000000000
+ SCFACG      1.000000000000000
+UPD2: CHDUM =   1.00000E+00  1.00000E+00
+ Updown DSA(i) :  0.000000000000000E+00
+ dTime in Constit :  0.000000000000000E+00
+S1,S3,TauMax: -7.2387E-09  5.5511E-17  5.0000E-01
+dt GetSig :  0.00 s 1152
+ ITER=    1  ERROR= 9.275E-07  ERRLOC= 2.806E-01  NPLAS=1152  NINAC=1132
+            FACTOR=-5.004E-10  ERRLCI= 0.000E+00  NPINT=   0  INACI=   0
+            CSP   = 5.908E-16  EGLM  = 0.000E+00  NPLBM=   0
+
+ Info2 A
+ Info2 B
+ iBack 2
+ iBack 3
+ dTime in Constit :  0.000000000000000E+00
+S1,S3,TauMax: -6.5270E-09  8.3267E-17  5.0000E-01
+dt GetSig :  0.02 s 1152
+ ITER=    2  ERROR= 4.794E-07  ERRLOC= 2.526E-09  NPLAS=1152  NINAC=   0
+            FACTOR=-6.055E-10  ERRLCI= 0.000E+00  NPINT=   0  INACI=   0
+            CSP   = 5.908E-16  EGLM  = 0.000E+00  NPLBM=   0
+
+ Info2 A
+ Info2 B
+ UITIT,ULTNIL: F F
+ CSP :   1.55308E-16  1.06326E-19  6.84616E-04
+ ClustVol
+ End ClustVol
+ ib_Size =  4096
+ opening file : C:\Program Files (x86)\Plaxis8x\Examples\BHLog.DTA\BHLog.004 Write  0
+ J in WtXXX 0 0 5
+ Used kB:  128  kB
+ AddCxx
+ unit  21  open?  F
+ Resulting free unit  21
+ ib_Size =  4096
+ opening file : C:\Program Files (x86)\Plaxis8x\Examples\BHLog.DTA\BHLog.CXX ReadWrite  0
+ Skipping  4912  bytes
+ bkhead:$$S000004H## 1400
+ BkHead : $$S000004H## 1400
+ ib_Size =  4096
+ unit  10  open?  F
+ Resulting free unit  10
+ opening file : C:\Program Files (x86)\Plaxis8x\Examples\BHLog.DTA\BHLog.SF4 Write  0
+ Call Step_Ready
+ After Call Step_Ready
+Time for this step :     0.060 s
+ Info1
+ Info2 A
+ Info2 B
+Calculation time :     0.910 s
+Time 22:56:00.69       0.91
+Time 22:56:00.69       0.00
+Total time :     0.910 s
+CPU   time :     0.889 s
+dT MTX =     0.190 s    1
+dT DCP =     0.050 s    1
+dT Back=     0.010 s   18
+dT ### =     0.090 s    4
+dT sxx =     0.010 s
+dT dll =     0.020 s

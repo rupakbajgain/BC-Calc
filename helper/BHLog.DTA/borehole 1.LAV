@@ -1,0 +1,25 @@
+ Blocksize of this file :  8192
+ Last SRC-file : INPCGAMP 05-Jul-2002 09:16:30
+ Last compiled : Friday 05-Jul-2002 09:25:45
+ File Version  : 8.0.0.1
+ User : Koxhiyoki Kabuto, Japan
+ Code : 7P105PKD 5d64c9d5
+ isNT   :  1
+ iMajor :  6
+ iMinor :  1
+ iBuild :  7601
+ GlMemStat  1
+  1          32        0.03      0.000  sizeof(MEMORYSTATUS)
+  2          34        0.03      0.000  percent of memory in use
+  3  4187058176  4088924.00   3993.090  bytes of physical memory
+  4  2742685696  2678404.00   2615.629  free physical memory bytes
+  5  4294967295  4194304.00   4096.000  bytes of paging file
+  6  4294967295  4194304.00   4096.000  free bytes of paging file
+  7  2147352576  2097024.00   2047.875  user bytes of address space
+  8  2073837568  2025232.00   1977.766  free user bytes
+ End of GlMemStat
+Time 17:51:24.39
+  INFORMATION FROM PLASNEW:
+ IHAND,NDOF :  7 2
+ INP- and/or MSH-file Do not exist !
+INP- and/or MSH-file do(es) not exist !

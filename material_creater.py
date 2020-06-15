@@ -16,14 +16,11 @@ def clamp(v, amin, amax):
 def GI_correction(GI):
     if not GI[0] in ['S','M','G','C','P','O']:
         GI=GI[1]+GI[1]
-    if GI=='MM':
-        GI='SM'
     return GI
 
-def get_correctedN(SPT_N):
+def get_correctedN(SPT_N, overburden):
     N60 = 0.55 * 1 * 1 * 0.75 * SPT_N/0.6
-    NC = 15+1/2*(SPT_N-15)
-    return (N60,NC)
+    return N60
 
 #from some useful notetion paper
 def get_correctedGamma(N60, y_sat, GI):
@@ -42,15 +39,14 @@ def get_Cu(N60, GI, is_clayey):
     Cu=0
     if is_clayey:
         Cu = 0.29 * N60**0.72 * 100
-        Cu=clamp(Cu, 10*2, 103*2)/2
+        Cu=clamp(Cu, 10, 103)
     if GI=='CG' or GI=='GC':
-        Cu=20
+        Cu=clamp(Cu, 20, 25)
     elif 'SM'== GI:
         Cu=clamp(Cu,20,50)
     elif 'SC'== GI:
         Cu=clamp(Cu,5,75)
-    # But max value of Cu is 2 + pi
-    Cu=clamp(Cu,0.01,103)
+    Cu=clamp(Cu,0.21,103)#0.2 min plasix
     # Plasix calculation needs very small Cu
     return(Cu)
 
@@ -71,16 +67,16 @@ def get_phi(N60, GI, packing_case):
         else:
             phi=clamp(phi, 32, 44)
     elif GI[0]=='S':
-        if packing_case==1:
-            phi = clamp(phi,0,30)
+        if packing_case<=1:
+            phi = clamp(phi,0,35)
         elif packing_case==2:
-            phi = clamp(phi,30,35)
+            phi = clamp(phi,25,40)
         elif packing_case==3:
-            phi = clamp(phi,35,40)
+            phi = clamp(phi,30,45)
         elif packing_case==4:
-            phi = clamp(phi,40,45)
+            phi = clamp(phi,35,40)
         else:
-            phi = clamp(phi,45,60)
+            phi = clamp(phi,40,60)
     elif GI[0]=='C':
         if GI[1]=='H':
             phi = clamp(phi, 17, 31)
@@ -90,48 +86,79 @@ def get_phi(N60, GI, packing_case):
         phi = clamp(phi, 23, 41)
     return phi
 
-def get_E(N60, GI, packing_case):
+def get_interpolated_clamped(x, x1, x2, y1, y2):
+    x = clamp(x, x1, x2)
+    m = (y2-y1)/2
+    y1 = y1+m/2
+    y2 = y2-m/2#take values from mid
+    out = y1 + (y2-y1)/(x2-x1) * (x-x1)
+    return out
+
+def get_E_help(N60, GI, surcharge):
     E=10*N60*100
-    if GI[0] == 'S':
-        if packing_case<2:
-            E=clamp(E, 4_000, 10_000)
-        elif packing_case==2:
-            E=clamp(E, 10_000, 30_000)
-        else:
-            E=clamp(E, 30_000, 55_000)
-    elif GI[0] == 'G':
-        E=clamp(E,70_000,170_000)
-    else:
-        if packing_case<3:
-            E=clamp(E, 4_000, 20_000)
-        else:#elif packing_case<2:
-            E=clamp(E, 20_000, 40_000)
-        E=E/2
-        #else: #no stiff clay
-        #    E=clamp(E, 40_000, 100_000)
+    if GI[0]=='C':
+        E = get_interpolated_clamped(N60,1,50,10,100)*surcharge
+    elif GI[0]=='S':
+        E = get_interpolated_clamped(N60,1,50,50,500)*surcharge
+    elif GI[0]=='M':
+        E = get_interpolated_clamped(N60,1,50,25,125)*surcharge
+    elif GI[0]=='P':
+        E = get_interpolated_clamped(N60,1,50,2,25)*surcharge
     return E
 
-def get_material(info):
+def get_E(N60, GI, packing_case, surcharge):#added surcharge
+    # packing case is for correction
+    E=get_E_help(N60, GI, surcharge)# let's replace it by new formula
+    if GI[0] == 'S':
+        if packing_case<=1:
+            E=clamp(E, 2_000, 15_000)
+        elif packing_case==2:
+            E=clamp(E, 7_000, 40_000)
+        else:
+            E=clamp(E, 30_000, 75_000)
+    elif GI[0] == 'G':
+        E=clamp(E,70_000,170_000)
+    elif GI[0]=='C':
+        E=clamp(E,4_000,100_000)
+    elif GI[0]=='M':
+        E=clamp(E,10_000,20_000)
+    else:
+        #others make it weak
+        if packing_case<=2:
+            E=clamp(E, 2_000, 10_000)
+        else:
+            E=clamp(E, 10_000, 20_000)
+    return E
+
+def get_material(info, prev_surcharge, depth):
     GI = info[1]
     SPT_N = float(info[2])
     y_sat = float(info[3])
     # now determine properties by various corrections
     GI = GI_correction(GI)
-    N60,NC = get_correctedN(SPT_N)
-    is_clayey = not (GI[0] in ['S','G'] or GI[1] in ['M','C'])
+    N60 = get_correctedN(SPT_N, prev_surcharge+17*depth)#guess
+    is_clayey = not (GI[0] in ['S','G'])
     gamma = get_correctedGamma(N60, y_sat, GI)
+    a_surcharge = prev_surcharge + gamma*depth
     Cu = get_Cu(N60, GI, is_clayey)
-    packing_case = get_packing_state(NC)
+    packing_case = get_packing_state(N60)
     phi = get_phi(N60, GI, packing_case)
     nu = 0.3
-    E = get_E(N60, GI, packing_case)
-    return (info[0],GI,phi, E, Cu, gamma, nu, N60)
+    E = get_E(N60, GI, packing_case, a_surcharge)
+    return (info[0],GI,phi, E, Cu, gamma, nu, N60, a_surcharge)
 
 def process_sfile(file):
     input_datas = file
     results = []
+    #surcharge is property of material
+    surcharge = 0.
+    prev_depth = 0.
     for i in input_datas[1][1]:
-        results.append(get_material(i))
+        new_depth = float(i[0])
+        mat = get_material(i, surcharge, new_depth-prev_depth)
+        surcharge = mat[8]
+        prev_depth = new_depth
+        results.append(mat)
     return results
 
 def material_creater(excel_data):

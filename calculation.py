@@ -12,7 +12,7 @@ calc_depths = [1.5, 3., 4.5]
 def get_top_material(input_datas, depth):
     old_material = input_datas[0]
     for i in input_datas:
-        deptht,_,_,_,_,_,_,_ = i
+        deptht = i[0]
         if deptht>depth:
             break
         old_material = i
@@ -53,24 +53,24 @@ def isCohesive(mat):
         return False
     return True
     
-def terzagi_method(phi, gamma, Cu, calc_depth):
+def terzagi_method(phi, gamma, Cu, calc_depth,surcharge):
     Nq = getTable(t_tables, 'nq', phi)
     Nc = getTable(t_tables, 'nc', phi)
     Ny = getTable(t_tables, 'ny', phi)
     # Now shape factors , 2x2 foundation
     B = 2
     L = 2
-    q = calc_depth * gamma
+    q = surcharge
     c_term = 1.3* Cu*Nc
     q_term = q*Nq
     y_term = 0.4 * gamma * B * Ny
-    p = c_term + q_term + y_term
+    p = c_term + q_term*0.5 + y_term*0.5
     #print(c_term,q_term,y_term)
     #print(mat)
     return((p-q)/3)
 
 #all three methods
-def meyerhof_method(phi, gamma, Cu, calc_depth):
+def meyerhof_method(phi, gamma, Cu, calc_depth,surcharge):
     Nq = getTable(m_tables, 'nq', phi)
     Nc = getTable(m_tables, 'nc', phi)
     Ny = getTable(m_tables, 'ny(m)', phi)
@@ -88,16 +88,16 @@ def meyerhof_method(phi, gamma, Cu, calc_depth):
     dc = 1 +0.2*math.sqrt(Kp)*calc_depth/B
     dq = 1 +0.1*math.sqrt(Kp)*calc_depth/B
     dy=dq
-    q = calc_depth * gamma
+    q = surcharge
     c_term = Cu*Nc*sc*dc
     q_term = q*Nq*sq*dq
     y_term = 0.5 * gamma * B * Ny*sy*dy
-    p = c_term + q_term + y_term
+    p = c_term + q_term*0.5 + y_term*0.5
     #print(c_term,q_term,y_term)
     #print(mat)
     return((p-q)/3)
 
-def hansen_method(phi, gamma, Cu, calc_depth):
+def hansen_method(phi, gamma, Cu, calc_depth,surcharge):
     Nq = getTable(m_tables, 'nq', phi)
     Nc = getTable(m_tables, 'nc', phi)
     Ny = getTable(m_tables, 'ny(h)', phi)
@@ -112,16 +112,16 @@ def hansen_method(phi, gamma, Cu, calc_depth):
     dc = 1 +0.4*B/L
     dq = 1 +2*math.tan(phi*math.pi/180)*((1-math.sin(phi*math.pi/180))**2)*calc_depth/B
     dy=1
-    q = calc_depth * gamma
+    q = surcharge
     c_term = Cu*Nc*sc*dc
     q_term = q*Nq*sq*dq
     y_term = 0.5 * gamma * B * Ny*sy*dy
-    p = c_term + q_term + y_term
+    p = c_term + q_term*0.5 + y_term*0.5
     #print(c_term,q_term,y_term)
     #print(mat)
     return((p-q)/3)
 
-def vesic_method(phi, gamma, Cu, calc_depth):
+def vesic_method(phi, gamma, Cu, calc_depth,surcharge):
     Nq = getTable(m_tables, 'nq', phi)
     Nc = getTable(m_tables, 'nc', phi)
     Ny = getTable(m_tables, 'ny(v)', phi)
@@ -136,11 +136,11 @@ def vesic_method(phi, gamma, Cu, calc_depth):
     dc = 1 +0.4*B/L
     dq = 1 +2*math.tan(phi*math.pi/180)*((1-math.sin(phi*math.pi/180))**2)*calc_depth/B
     dy=1
-    q = calc_depth * gamma
+    q = surcharge
     c_term = Cu*Nc*sc*dc
     q_term = q*Nq*sq*dq
     y_term = 0.5 * gamma * B * Ny*sy*dy
-    p = c_term + q_term + y_term
+    p = c_term + q_term*0.5 + y_term*0.5
     #print(c_term,q_term,y_term)
     #print(mat)
     return((p-q)/3)
@@ -157,10 +157,15 @@ def get_bearing_capacity(input_datas, calc_depth):
     gamma = mat[5]
     Cu = mat[4]
     N60 = mat[7]
-    terzaghi = terzagi_method(phi, gamma, Cu, calc_depth)
-    meyerhof = meyerhof_method(phi, gamma, Cu, calc_depth)
-    hansen = hansen_method(phi, gamma, Cu, calc_depth)
-    vesic = vesic_method(phi, gamma, Cu, calc_depth)
+    surcharge = mat[8]
+    #print('phi=',phi)
+    #print('gamma=',gamma)
+    #print('c=',Cu)
+    #print('==',mat[1])
+    terzaghi = terzagi_method(phi, gamma, Cu, calc_depth,surcharge)
+    meyerhof = meyerhof_method(phi, gamma, Cu, calc_depth,surcharge)
+    hansen = hansen_method(phi, gamma, Cu, calc_depth,surcharge)
+    vesic = vesic_method(phi, gamma, Cu, calc_depth,surcharge)
     n_teng = n_teng_method(N60, calc_depth)
     return([terzaghi, meyerhof, hansen, vesic, n_teng])
 
@@ -189,9 +194,8 @@ def update_datas(input_datas):
     template += ' \nWHERE ModelDesc = ?;'
     #print(template)
     # Req prop min
-    for i in range(24):
+    for i in range(12):
         mat=get_top_material(input_datas, (i+1)/2)
-        lname = str(i)
         phi = mat[2]
         if isCohesive(mat):
             phi=0.01
@@ -241,7 +245,6 @@ def create_empty_file(name):
         pass
 
 def plasix_method(input_datas):
-    pass
     batch_program = "C:\\Program Files (x86)\\Plaxis8x\\batch.exe"
     file = os.getcwd()+"\\helper\\BHLog.plx"
     #Remove old force datas
@@ -283,23 +286,28 @@ def plasix_method(input_datas):
         dat = f.read().splitlines()
         for h,i in enumerate(dat[1:]):
             h = 1.5*(h+1)
-            gamma = get_top_material(input_datas,h)[5]
-            datas.append((float(i.split(' ')[1])*-2*math.pi-gamma*h)/3)
+            surcharge = get_top_material(input_datas,h)[8]
+            datas.append((float(i.split(' ')[1])*-2-surcharge)/3)
     os.unlink(force_data_file)
     return datas
-    
+
+do_plasix = True    
 def process_file(files):
     input_datas = files
     filtered = []
     for i in input_datas:
-        filtered.append((float(i[0]),i[1],float(i[2]),float(i[3]),float(i[4]),float(i[5]),float(i[6]),float(i[7])))
+        filtered.append((float(i[0]),i[1],float(i[2]),float(i[3]),float(i[4]),float(i[5]),float(i[6]),float(i[7]),float(i[8])))
     input_datas=filtered
     results = []
     for i in calc_depths:
         results.append(get_bearing_capacity(input_datas,i))
-    plasix = plasix_method(input_datas)
-    for i in range(len(results)):
-        results[i].append(plasix[i])
+    if do_plasix:
+        plasix = plasix_method(input_datas)
+        for i in range(len(results)):
+            results[i].append(plasix[i])
+    else:
+        for i in range(len(results)):
+            results[i].append(0.)
     return results
     
 def calculation(mat_file):
