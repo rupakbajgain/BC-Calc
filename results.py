@@ -18,13 +18,13 @@ def init_location_service():
     locations=filtered
     for i in locations:
         nearest=locations[0]
-        dist=100000000000
+        dist=10000
         for j in locations:
             dists = distance(i,j)
             if dists>0.0001:
                 if dists<dist:
                     dist=dists
-        locations_rad.append(dist)
+        locations_rad.append(math.sqrt(dist))
     #print(locations_rad)
 
 # randomly distiributed location
