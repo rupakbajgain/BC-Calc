@@ -231,7 +231,7 @@ def update_data_cache():
     while findWindow(window_class_splash):
         time.sleep(0.5)
     hwndMain = findWindow(window_class_main)
-    time.sleep(0.5)
+    time.sleep(1) # some time before loading
     win32gui.PostMessage(hwndMain, win32con.WM_COMMAND, 5, 0)
     time.sleep(1.25)#crack does it's work here
     win32gui.PostMessage(hwndMain, win32con.WM_COMMAND, 19, 0)
@@ -253,17 +253,17 @@ def plasix_method(input_datas):
     update_datas(input_datas)
     update_data_cache()
     file="C:\\Program Files (x86)\\Plaxis8x\\Examples\\BHLog.plx"
-    create_empty_file(force_data_file)
     p=subprocess.Popen([batch_program, file])
     time.sleep(0.5)
     window_class_main = 'TBatchFrm'
     window_class_splash = 'TCalcSplash'
     window_class_calculation = 'TCalcForm'
     while findWindow(window_class_splash):
-        time.sleep(0.5)
+        time.sleep(0.3)
     # get main window hwnd, print(hwndMain)
     #calculate
     time.sleep(1.25)#more data more time to load,1.5:ok
+    create_empty_file(force_data_file)
     hwndMain = findWindow(window_class_main)
     win32gui.PostMessage(hwndMain, win32con.WM_COMMAND, 23, 0)
     #check for 4 lines on that file
@@ -276,9 +276,10 @@ def plasix_method(input_datas):
                     break
         except:
             pass
-    time.sleep(0.5)
+    time.sleep(0.75)
     #save and exit
     win32gui.PostMessage(hwndMain, win32con.WM_COMMAND, 3, 0)
+    time.sleep(0.5)
     win32gui.PostMessage(hwndMain, win32con.WM_COMMAND, 11, 0)
     p.wait()
     datas = []

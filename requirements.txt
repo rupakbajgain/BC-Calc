@@ -2,3 +2,5 @@ geopy
 xlrd
 openpyxl
 pyodbc
+requests
+pywin32

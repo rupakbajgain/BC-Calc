@@ -110,18 +110,20 @@ def get_E(N60, GI, packing_case, surcharge):#added surcharge
     # packing case is for correction
     E=get_E_help(N60, GI, surcharge)# let's replace it by new formula
     if GI[0] == 'S':
-        if packing_case<=1:
-            E=clamp(E, 2_000, 15_000)
-        elif packing_case==2:
-            E=clamp(E, 7_000, 40_000)
-        else:
-            E=clamp(E, 30_000, 75_000)
+        #if packing_case<=1:
+        #    E=clamp(E, 2_000, 15_000)
+        #elif packing_case==2:
+        #    E=clamp(E, 7_000, 40_000)
+        #else:
+        #    E=clamp(E, 30_000, 75_000)
+        E = clamp(E, 2_000, 75_000)
+        # no mixing
     elif GI[0] == 'G':
         E=clamp(E,70_000,170_000)
     elif GI[0]=='C':
         E=clamp(E,4_000,100_000)
     elif GI[0]=='M':
-        E=clamp(E,10_000,20_000)
+        E=clamp(E,4_000,30_000)
     else:
         #others make it weak
         if packing_case<=2:
@@ -145,7 +147,8 @@ def get_material(info, prev_surcharge, depth):
     phi = get_phi(N60, GI, packing_case)
     nu = 0.3
     E = get_E(N60, GI, packing_case, a_surcharge)
-    return (info[0],GI,phi, E, Cu, gamma, nu, N60, a_surcharge)
+    # c=Cu/2
+    return (info[0],GI,phi, E, Cu/2, gamma, nu, N60, a_surcharge)
 
 def process_sfile(file):
     input_datas = file
