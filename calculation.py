@@ -231,7 +231,7 @@ def update_data_cache():
     while findWindow(window_class_splash):
         time.sleep(0.5)
     hwndMain = findWindow(window_class_main)
-    time.sleep(1) # some time before loading
+    time.sleep(1.5) # some time before loading
     win32gui.PostMessage(hwndMain, win32con.WM_COMMAND, 5, 0)
     time.sleep(1.25)#crack does it's work here
     win32gui.PostMessage(hwndMain, win32con.WM_COMMAND, 19, 0)

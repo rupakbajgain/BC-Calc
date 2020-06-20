@@ -45,6 +45,7 @@ results = []
 results15 = []
 results30 = []
 results45 = []
+tex = []
 def process_file(files):
     filename, file = files
     input_datas = helper.load_csv(filename,'.\\datas\\result\\')
@@ -53,14 +54,37 @@ def process_file(files):
     for i in range(1,4):
         m=min(float(input_datas[2][i]),float(input_datas[3][i]),float(input_datas[4][i]),float(input_datas[5][i]),float(input_datas[6][i]),float(input_datas[7][i]))
         results.append((file,loc,input_datas[1][i],input_datas[2][i],input_datas[3][i],input_datas[4][i],input_datas[5][i],input_datas[6][i],input_datas[7][i],lat,long,m))
+        out = ''
         if i==1:
             results15.append((lat,long,m))
+            out='\\multirow{3}{8cm}{'+loc+ ' ({:f},{:f})'.format(lat,long) + '}'
         elif i==2:
             results30.append((lat,long,m))
+            out='\cline{2-11}'
         elif i==3:
-            results45.append((lat,long,m))    
+            out='\cline{2-11}'
+            results45.append((lat,long,m))
+        # mid body here
+        out += ' & ' + input_datas[1][i]
+        out += ' & {:.2f}'.format(float(input_datas[2][i]))
+        out += ' & {:.2f}'.format(float(input_datas[3][i]))
+        out += ' & {:.2f}'.format(float(input_datas[4][i]))
+        out += ' & {:.2f}'.format(float(input_datas[5][i]))
+        out += ' & {:.2f}'.format(float(input_datas[6][i]))
+        out += ' & {:.2f}'.format(float(input_datas[7][i]))
+        out += ' & {:.2f}'.format(m)
+        # end
+        if i==3:
+            out+='\\\\\n\hline'
+        else:
+            out+='\\\\*'
+        tex.append(out)
     results.append(())
     filtered = []
+
+def create_tex():
+    with open('.\\datas\\result.tex','w') as f:
+        f.write('\n'.join(tex)[:-9])
 
 results.append(['file','location','depth','terzaghi','meyerhof','hansen','vesic','teng','plasix','lat','long','min'])
 results15.append(['latitude','longitude','BC'])
@@ -83,3 +107,4 @@ if __name__=='__main__':
     helper.write_csv('result15.csv',results15,'.\\datas\\')
     helper.write_csv('result30.csv',results30,'.\\datas\\')
     helper.write_csv('result45.csv',results45,'.\\datas\\')
+    create_tex()

@@ -148,7 +148,7 @@ def get_material(info, prev_surcharge, depth):
     nu = 0.3
     E = get_E(N60, GI, packing_case, a_surcharge)
     # c=Cu/2
-    return (info[0],GI,phi, E, Cu/2, gamma, nu, N60, a_surcharge)
+    return (info[0],GI,phi, E, Cu, gamma, nu, N60, a_surcharge)
 
 def process_sfile(file):
     input_datas = file
