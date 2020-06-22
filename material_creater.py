@@ -50,12 +50,15 @@ def get_Cu(N60, GI, is_clayey):
     # Plasix calculation needs very small Cu
     return(Cu)
 
-def get_packing_state(NC):
+def get_packing_state(NC, is_clayey):
+    N = NC*2
     # Ok, first determining packing condition as per Table 2.4,
     S_PHELP = [0,4,10,30,50]
+    if is_clayey:
+        S_PHELP = [0,2,4,8,15,30]
     packing_case = 5 # Packing cases as per table
     for i,v in enumerate(S_PHELP):
-        if NC>v:
+        if N>v:
             packing_case=i
     return packing_case
 
@@ -68,13 +71,13 @@ def get_phi(N60, GI, packing_case):
             phi=clamp(phi, 32, 44)
     elif GI[0]=='S':
         if packing_case<=1:
-            phi = clamp(phi,0,35)
+            phi = clamp(phi,20,35)
         elif packing_case==2:
             phi = clamp(phi,25,40)
         elif packing_case==3:
             phi = clamp(phi,30,45)
         elif packing_case==4:
-            phi = clamp(phi,35,40)
+            phi = clamp(phi,35,45)
         else:
             phi = clamp(phi,40,60)
     elif GI[0]=='C':
@@ -96,40 +99,37 @@ def get_interpolated_clamped(x, x1, x2, y1, y2):
 
 def get_E_help(N60, GI, surcharge):
     E=10*N60*100
-    if GI[0]=='C':
-        E = get_interpolated_clamped(N60,1,50,10,100)*surcharge
-    elif GI[0]=='S':
-        E = get_interpolated_clamped(N60,1,50,50,500)*surcharge
-    elif GI[0]=='M':
-        E = get_interpolated_clamped(N60,1,50,25,125)*surcharge
-    elif GI[0]=='P':
-        E = get_interpolated_clamped(N60,1,50,2,25)*surcharge
     return E
 
 def get_E(N60, GI, packing_case, surcharge):#added surcharge
     # packing case is for correction
     E=get_E_help(N60, GI, surcharge)# let's replace it by new formula
     if GI[0] == 'S':
-        #if packing_case<=1:
-        #    E=clamp(E, 2_000, 15_000)
-        #elif packing_case==2:
-        #    E=clamp(E, 7_000, 40_000)
-        #else:
-        #    E=clamp(E, 30_000, 75_000)
-        E = clamp(E, 2_000, 75_000)
-        # no mixing
+        if GI[1] == 'M':
+            E=clamp(E, 10_000, 20_000)
+        if packing_case<=2:
+            E=clamp(E, 2_000, 25_000)
+        elif packing_case==3:
+            E=clamp(E, 15_000, 30_000)
+        else:
+            E=clamp(E, 35_000, 55_000)
+        E = clamp(E, 2_000, 55_000)
     elif GI[0] == 'G':
         E=clamp(E,70_000,170_000)
     elif GI[0]=='C':
-        E=clamp(E,4_000,100_000)
+        if packing_case<=2:
+            E=clamp(E,2_000, 20_000)
+        elif packing_case<=4:
+            E=clamp(E,20_000, 40_000)
+        else:
+            E=clamp(E,40_000,100_000)
     elif GI[0]=='M':
         E=clamp(E,4_000,30_000)
-    else:
-        #others make it weak
+    else:#min both
         if packing_case<=2:
-            E=clamp(E, 2_000, 10_000)
+            E=clamp(E, 2_000, 20_000)
         else:
-            E=clamp(E, 10_000, 20_000)
+            E=clamp(E, 10_000, 55_000)
     return E
 
 def get_material(info, prev_surcharge, depth):
@@ -143,7 +143,7 @@ def get_material(info, prev_surcharge, depth):
     gamma = get_correctedGamma(N60, y_sat, GI)
     a_surcharge = prev_surcharge + gamma*depth
     Cu = get_Cu(N60, GI, is_clayey)
-    packing_case = get_packing_state(N60)
+    packing_case = get_packing_state(N60,is_clayey)
     phi = get_phi(N60, GI, packing_case)
     nu = 0.3
     E = get_E(N60, GI, packing_case, a_surcharge)

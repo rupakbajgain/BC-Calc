@@ -292,7 +292,7 @@ def plasix_method(input_datas):
     os.unlink(force_data_file)
     return datas
 
-do_plasix = True    
+do_plasix = True
 def process_file(files):
     input_datas = files
     filtered = []
