@@ -5,6 +5,7 @@ import math
 
 #distribution radius for each location
 locations_rad =[]
+locations_alone = []#don't move single locations
 locations=[]
 
 def distance(x,y):
@@ -25,16 +26,21 @@ def init_location_service():
                 if dists<dist:
                     dist=dists
         locations_rad.append(math.sqrt(dist))
-    #print(locations_rad)
+        locations_alone.append(False)
 
 # randomly distiributed location
 def get_location(loc):
     loc = loc + ', Nepal'
-    idxx = 0
+    idxx = -1
     for idx,i in enumerate(locations):
         if i[0].lower().strip()==loc.lower().strip():
             idxx=idx
             break
+    if idxx==-1:
+        print('Please run geocode')
+    if not locations_alone[idxx]:
+        locations_alone[idxx]=True
+        return (locations[idxx][1],locations[idxx][2])
     rangle = random.uniform(0,2*math.pi)
     rdist = random.uniform(0,locations_rad[idxx])
     lat = locations[idxx][1] + rdist * math.sin(rangle)
@@ -84,7 +90,7 @@ def process_file(files):
 
 def create_tex():
     with open('.\\datas\\result.tex','w') as f:
-        f.write('\n'.join(tex)[:-9])
+        f.write('\n'.join(tex)[:-7])
 
 results.append(['file','location','depth','terzaghi','meyerhof','hansen','vesic','teng','plasix','lat','long','min'])
 results15.append(['latitude','longitude','BC'])

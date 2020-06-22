@@ -13,6 +13,7 @@ def fetchGeo(name):
     for i in services:
         try:
             locator = i(user_agent='myGeocoder')
+            print(locator)
             location = locator.geocode(name)
             return((location.latitude, location.longitude))
         except:
